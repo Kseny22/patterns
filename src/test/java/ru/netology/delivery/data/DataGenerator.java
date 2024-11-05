@@ -37,6 +37,3 @@ public class DataGenerator {
         return faker.phoneNumber().phoneNumber();
     }
 }
-
-
-
