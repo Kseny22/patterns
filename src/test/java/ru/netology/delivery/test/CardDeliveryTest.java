@@ -2,6 +2,10 @@ package ru.netology.delivery.test;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.delivery.data.DataGenerator;
@@ -18,6 +22,17 @@ public class CardDeliveryTest {
     String name = DataGenerator.generateName();
     String phone = DataGenerator.generatePhone();
     String city = DataGenerator.generateCity();
+
+    @BeforeAll
+    static void setupAllureReports() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
+    }
+
+    @AfterAll
+
+    static void removeListener() {
+        SelenideLogger.removeListener("AllureSelenide");
+    }
 
     @BeforeEach
     public void setUp() {
